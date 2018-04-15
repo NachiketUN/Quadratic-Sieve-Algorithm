@@ -102,7 +102,7 @@ def find_prime_factors(n):
         that the global small_primes has already been initialised. Do not
         return duplicate factors.
     """
-    print("Checking wheher {} is a perfect power ...".format(n))
+    print("Checking whether {} is a perfect power ...".format(n))
     perfect_power = check_perfect_power(n)
     if perfect_power:
         print("{} is {}^{}".format(n, perfect_power[0], perfect_power[1]))
@@ -247,7 +247,11 @@ def factorise(n):
 
     if factors:
         print("Prime factors found so far:")
-        print(*factors, sep=', ')
+        factors_temp = []
+        for _ in factors:
+            if _ not in factors_temp:
+                factors_temp.append(_)
+        print(*factors_temp, sep=', ')
     else:
         print("No small factors found!")
 
@@ -269,7 +273,14 @@ def factorise(n):
 
 def main():
     n = int(input("Enter the number to be factorized: "))
-    print("\nPrime factors: {}".format(factorise(n)))
+    result = factorise(n)
+    new_result = []
+
+    for _ in result:
+        if _ not in new_result:
+            new_result.append(_)
+
+    print("\nPrime factors: {}".format(new_result))
 
 if __name__ == '__main__':
     main()
