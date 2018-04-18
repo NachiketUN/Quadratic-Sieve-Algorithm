@@ -51,8 +51,7 @@ def STonelli(n, p): #tonelli-shanks to solve modular square root, x^2 = N (mod p
     assert quad_residue(n, p) == 1, "not a square (mod p)"
     q = p - 1
     s = 0
-    print("Tonelli-Shanks")
-    print(quad_residue(n,p))
+    
     while q % 2 == 0:
         q //= 2
         s += 1
@@ -60,7 +59,7 @@ def STonelli(n, p): #tonelli-shanks to solve modular square root, x^2 = N (mod p
         r = pow(n, (p + 1) // 4, p)
         return r,p-r
     for z in range(2, p):
-        print(quad_residue(z, p))
+        #print(quad_residue(z, p))
         if p - 1 == quad_residue(z, p):
             break
     c = pow(z, q, p)
