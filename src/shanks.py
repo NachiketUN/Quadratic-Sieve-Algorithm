@@ -1,17 +1,17 @@
 
 # utility function to find pow(base, exponent) % modulus
-def pow(base,exponent,mod):
-	result=1
-	base=base%mod
-	while exponent > 0:
+# def pow(base,exponent,mod):
+# 	result=1
+# 	base=base%mod
+# 	while exponent > 0:
 
-		if exponent%2==1:
-			result=(result * base)%mod
+# 		if exponent%2==1:
+# 			result=(result * base)%mod
 
-		exponent=exponent>>1
-		base=(base*base)%mod
+# 		exponent=exponent>>1
+# 		base=(base*base)%mod
 
-	return result
+# 	return result
 
 def gcd(a,b):
 	if b==0:
@@ -38,7 +38,7 @@ def convertx2e(x):
 	while x%2==0:
 		x/=2
 		e+=1
-	return x,e
+	return int(x),e
 
 # Main function for finding the modular square root
 def STonelli(n,p):
@@ -53,7 +53,7 @@ def STonelli(n,p):
     # If below expression return (p - 1) then modular
 	# square root is not possible
 	#printf("%d\n",pow(n, (p - 1) / 2, p) );
-	if pow(n, (p - 1) / 2, p) == (p - 1):
+	if pow(n, (p - 1) // 2, p) == (p - 1):
 
 		print("no sqrt possible\n")
 		return -1
@@ -69,13 +69,13 @@ def STonelli(n,p):
 	while True:
 
 		# q - 1 is in place of (-1 % p)
-		if pow(q, (p - 1) / 2, p) == (p - 1):
+		if pow(q, (p - 1) // 2, p) == (p - 1):
 			break
 		q+=1
 
 	
 	# Initializing variable x, b and g
-	x = pow(n, (s + 1) / 2, p)
+	x = pow(n, (s + 1) // 2, p)
 	b = pow(n, s, p)
 	g = pow(q, s, p)
 
