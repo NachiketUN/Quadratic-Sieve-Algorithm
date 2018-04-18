@@ -75,40 +75,7 @@ def quad_residue(a,n):
     return z
 
 
-def tonelli(n, p): #tonelli-shanks to solve modular square root, x^2 = N (mod p)
-    assert quad_residue(n, p) == 1, "not a square (mod p)"
-    q = p - 1
-    s = 0
-    print("Tonelli-Shanks")
-    print(quad_residue(n,p))
-    while q % 2 == 0:
-        q //= 2
-        s += 1
-    if s == 1:
-        r = pow(n, (p + 1) // 4, p)
-        return r,p-r
-    for z in range(2, p):
-        print(quad_residue(z, p))
-        if p - 1 == quad_residue(z, p):
-            break
-    c = pow(z, q, p)
-    r = pow(n, (q + 1) // 2, p)
-    t = pow(n, q, p)
-    m = s
-    t2 = 0
-    while (t - 1) % p != 0:
-        t2 = (t * t) % p
-        for i in range(1, m):
-            if (t2 - 1) % p == 0:
-                break
-            t2 = (t2 * t2) % p
-        b = pow(c, 1 << (m - i - 1), p)
-        r = (r * b) % p
-        c = (b * b) % p
-        t = (t * c) % p
-        m = i
 
-    return (r,p-r)
 
         
 def size_bound(N): # finds optimal factor base size and interval
@@ -118,22 +85,9 @@ def size_bound(N): # finds optimal factor base size and interval
     print(F,I)
     return int(F),int(I)
 
-# def siqs_factor_base_primes(n, nf):
-#     """Compute and return nf factor base primes suitable for a Quadratic
-#     Sieve on the number n.
-#     """
-#     small_primes=[] #Compute list of small primes upto B.
-#     factor_base = []
-#     for p in small_primes:
-#         if quad_residue(n, p):
-#             t = sqrt_mod_prime(n%p,p)
-#             lp = round(log2(p))
-#             factor_base.append(FactorBasePrime(p, t, lp))   
-#             if len(factor_base)>= nf:
-#                 break
-#     return factor_base
+
     
-def factor_base_primes(N,B):
+def find_base(N,B):
 # generates a B-smooth factor base
 
     factor_base = []
@@ -166,9 +120,10 @@ def find_smooth(factor_base,N,I):
                 sieve_list[j] //= 2
     print("")
     print(sieve_list)
+    print(factor_base)
     for p in factor_base[1:]: #not including 2
-        residues = tonelli(N,p) #finds x such that x^2 = n (mod p). There are two start solutions
-        #print(residues)
+        residues = STonelli(N,p) #finds x such that x^2 = n (mod p). There are two start solutions
+        print(residues)
         
         for r in residues:
             for i in range((r-root) % p, len(sieve_list), p): # Now every pth term will also be divisible
@@ -345,7 +300,7 @@ def QS(n,B,I):
     #F,I = size_bound(N)
     
     print("Generating {}-smooth factor base...".format(B))
-    factor_base = factor_base_primes(N,B) #generates a B-smooth factor base
+    factor_base = find_base(N,B) #generates a B-smooth factor base
     #print(factor_base)
 
     global F
@@ -399,4 +354,4 @@ def QS(n,B,I):
     return("Didn't find any nontrivial factors!")
                    
 
-print(QS(902834,43,100))    
+print(QS(90283481,100,1000))    
