@@ -8,3 +8,10 @@ The algorithm is single-polynomial version.
 It factors an integer N, using a chosen factor base of P primes, and a sieve interval.
 
 Run 'main.py' to begin execution
+
+## License
+The MIT License (MIT)
+
+Copyright (c) 2023 Nachiket Naganure
+
+
