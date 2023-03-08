@@ -12,6 +12,6 @@ Run 'main.py' to begin execution
 ## License
 The MIT License (MIT)
 
-Copyright (c) 2023 Nachiket Naganure
+Copyright (c) 2023 Nachiket Umesh Naganure
 
 
